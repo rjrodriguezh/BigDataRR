@@ -1,0 +1,42 @@
+name: ETL Edu Data Platform
+
+on:
+  schedule:
+    - cron: "0 9 * * *"   # Ejecuta todos los días a las 09:00 UTC (06:00 Chile)
+  workflow_dispatch: {}     # Permite correrlo manualmente
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest   # GitHub usa un servidor Linux gratis
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Prepare folders
+        run: |
+          mkdir -p data/raw data/silver data/gold reportes
+          ls -la data/raw || true
+
+      - name: Run ETL
+        env:
+          EDP_BASE: ${{ github.workspace }}
+        run: python src/flow.py
+
+      - name: Upload artifacts (reports + gold)
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            reportes/*.csv
+            data/gold/*.parquet
