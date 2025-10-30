@@ -1,0 +1,8 @@
+pandas
+pyarrow
+prefect>=2.14
+gspread
+gspread-dataframe
+google-auth
+requests
+python-dotenv

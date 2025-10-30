@@ -1,0 +1,5 @@
+run_ts,status,rows,failed_rows,failed_ratio,threshold_ratio,fail_detail_path,uniqueness_enabled
+20251029_134847,FAIL,1044,48,0.045977,0.02,C:\dev\edu-data-platform\logs\dq_failures_20251029_134847.csv,
+20251029_135752,PASS,1044,0,0.0,0.02,,False
+20251029_170503,PASS,1044,0,0.0,0.02,,False
+20251029_171709,PASS,1044,0,0.0,0.02,,False
