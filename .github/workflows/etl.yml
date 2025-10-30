@@ -40,3 +40,11 @@ jobs:
           path: |
             reportes/*.csv
             data/gold/*.parquet
+
+      - name: List outputs (debug)
+        run: |
+          echo "---- reportes ----"
+          ls -la reportes || true
+          echo "---- gold ----"
+          ls -la data/gold || true
+
